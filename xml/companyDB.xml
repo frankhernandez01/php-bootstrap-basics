@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+- phpMyAdmin XML Dump
+- version 4.5.0.2
+- https://www.phpmyadmin.net
+-
+- Host: 127.0.0.1
+- Generation Time: Nov 15, 2015 at 01:44 AM
+- Server version: 10.0.17-MariaDB
+- PHP Version: 5.6.14
+-->
+
+<pma_xml_export version="1.0" xmlns:pma="http://www.phpmyadmin.net/some_doc_url/">
+    <!--
+    - Structure schemas
+    -->
+    <pma:structure_schemas>
+        <pma:database name="company" collation="latin1_swedish_ci" charset="latin1">
+            <pma:table name="department">
+                CREATE TABLE `department` (
+                  `dname` varchar(15) NOT NULL,
+                  `dnumber` int(11) NOT NULL,
+                  `mgrssn` char(9) NOT NULL,
+                  `mgrstartdate` char(10) DEFAULT NULL,
+                  PRIMARY KEY (`dnumber`),
+                  UNIQUE KEY `deptsk` (`dname`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+            </pma:table>
+            <pma:table name="dependent">
+                CREATE TABLE `dependent` (
+                  `essn` char(9) NOT NULL,
+                  `dependent_name` varchar(15) NOT NULL,
+                  `sex` char(1) DEFAULT NULL,
+                  `bdate` char(10) DEFAULT NULL,
+                  `relationship` varchar(8) DEFAULT NULL,
+                  PRIMARY KEY (`essn`,`dependent_name`),
+                  CONSTRAINT `depempfk` FOREIGN KEY (`essn`) REFERENCES `employee` (`ssn`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+            </pma:table>
+            <pma:table name="dept_locations">
+                CREATE TABLE `dept_locations` (
+                  `dnumber` int(11) NOT NULL,
+                  `dlocation` varchar(15) NOT NULL,
+                  PRIMARY KEY (`dnumber`,`dlocation`),
+                  CONSTRAINT `dlocdeptfk` FOREIGN KEY (`dnumber`) REFERENCES `department` (`dnumber`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+            </pma:table>
+            <pma:table name="employee">
+                CREATE TABLE `employee` (
+                  `fname` varchar(15) NOT NULL,
+                  `minit` char(1) DEFAULT NULL,
+                  `lname` varchar(15) NOT NULL,
+                  `ssn` char(9) NOT NULL,
+                  `bdate` char(10) DEFAULT NULL,
+                  `address` varchar(30) DEFAULT NULL,
+                  `sex` char(1) DEFAULT NULL,
+                  `salary` decimal(10,2) DEFAULT NULL,
+                  `superssn` char(9) DEFAULT NULL,
+                  `dno` int(11) NOT NULL,
+                  PRIMARY KEY (`ssn`),
+                  KEY `empdeptfk` (`dno`),
+                  CONSTRAINT `empdeptfk` FOREIGN KEY (`dno`) REFERENCES `department` (`dnumber`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+            </pma:table>
+            <pma:table name="project">
+                CREATE TABLE `project` (
+                  `pname` varchar(15) NOT NULL,
+                  `pnumber` int(11) NOT NULL,
+                  `plocation` varchar(15) DEFAULT NULL,
+                  `dnum` int(11) NOT NULL,
+                  PRIMARY KEY (`pnumber`),
+                  UNIQUE KEY `projsk` (`pname`),
+                  KEY `projdeptfk` (`dnum`),
+                  CONSTRAINT `projdeptfk` FOREIGN KEY (`dnum`) REFERENCES `department` (`dnumber`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+            </pma:table>
+            <pma:table name="works_on">
+                CREATE TABLE `works_on` (
+                  `essn` char(9) NOT NULL,
+                  `pno` int(11) NOT NULL,
+                  `hours` decimal(3,1) NOT NULL,
+                  PRIMARY KEY (`essn`,`pno`),
+                  KEY `workprojfk` (`pno`),
+                  CONSTRAINT `workempfk` FOREIGN KEY (`essn`) REFERENCES `employee` (`ssn`),
+                  CONSTRAINT `workprojfk` FOREIGN KEY (`pno`) REFERENCES `project` (`pnumber`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+            </pma:table>
+        </pma:database>
+    </pma:structure_schemas>
+
+    <!--
+    - Database: 'company'
+    -->
+    <database name="company">
+        <!-- Table department -->
+        <table name="department">
+            <column name="dname">Headquarters</column>
+            <column name="dnumber">1</column>
+            <column name="mgrssn">888665555</column>
+            <column name="mgrstartdate">1981-06-19</column>
+        </table>
+        <table name="department">
+            <column name="dname">Administration</column>
+            <column name="dnumber">4</column>
+            <column name="mgrssn">987654321</column>
+            <column name="mgrstartdate">1995-01-01</column>
+        </table>
+        <table name="department">
+            <column name="dname">Research</column>
+            <column name="dnumber">5</column>
+            <column name="mgrssn">333445555</column>
+            <column name="mgrstartdate">1988-05-22</column>
+        </table>
+        <!-- Table dependent -->
+        <table name="dependent">
+            <column name="essn">123456789</column>
+            <column name="dependent_name">Alice</column>
+            <column name="sex">F</column>
+            <column name="bdate">1988-12-30</column>
+            <column name="relationship">daughter</column>
+        </table>
+        <table name="dependent">
+            <column name="essn">123456789</column>
+            <column name="dependent_name">Elizabeth</column>
+            <column name="sex">F</column>
+            <column name="bdate">1967-05-05</column>
+            <column name="relationship">spouse</column>
+        </table>
+        <table name="dependent">
+            <column name="essn">123456789</column>
+            <column name="dependent_name">Michael</column>
+            <column name="sex">M</column>
+            <column name="bdate">1988-01-04</column>
+            <column name="relationship">son</column>
+        </table>
+        <table name="dependent">
+            <column name="essn">333445555</column>
+            <column name="dependent_name">Alice</column>
+            <column name="sex">F</column>
+            <column name="bdate">1986-04-05</column>
+            <column name="relationship">daughter</column>
+        </table>
+        <table name="dependent">
+            <column name="essn">333445555</column>
+            <column name="dependent_name">Joy</column>
+            <column name="sex">F</column>
+            <column name="bdate">1958-05-03</column>
+            <column name="relationship">spouse</column>
+        </table>
+        <table name="dependent">
+            <column name="essn">333445555</column>
+            <column name="dependent_name">Theodore</column>
+            <column name="sex">M</column>
+            <column name="bdate">1983-10-25</column>
+            <column name="relationship">son</column>
+        </table>
+        <table name="dependent">
+            <column name="essn">987654321</column>
+            <column name="dependent_name">Abner</column>
+            <column name="sex">M</column>
+            <column name="bdate">1942-02-28</column>
+            <column name="relationship">spouse</column>
+        </table>
+        <!-- Table dept_locations -->
+        <table name="dept_locations">
+            <column name="dnumber">1</column>
+            <column name="dlocation">Houston</column>
+        </table>
+        <table name="dept_locations">
+            <column name="dnumber">4</column>
+            <column name="dlocation">Stafford</column>
+        </table>
+        <table name="dept_locations">
+            <column name="dnumber">5</column>
+            <column name="dlocation">Bellaire</column>
+        </table>
+        <table name="dept_locations">
+            <column name="dnumber">5</column>
+            <column name="dlocation">Houston</column>
+        </table>
+        <table name="dept_locations">
+            <column name="dnumber">5</column>
+            <column name="dlocation">Sugarland</column>
+        </table>
+        <!-- Table employee -->
+        <table name="employee">
+            <column name="fname">John</column>
+            <column name="minit">B</column>
+            <column name="lname">Smith</column>
+            <column name="ssn">123456789</column>
+            <column name="bdate">1965-01-09</column>
+            <column name="address">731 Fondren, Houston, TX</column>
+            <column name="sex">M</column>
+            <column name="salary">30000.00</column>
+            <column name="superssn">333445555</column>
+            <column name="dno">5</column>
+        </table>
+        <table name="employee">
+            <column name="fname">Franklin</column>
+            <column name="minit">T</column>
+            <column name="lname">Wong</column>
+            <column name="ssn">333445555</column>
+            <column name="bdate">1955-12-08</column>
+            <column name="address">638 Voss, Houston, TX</column>
+            <column name="sex">M</column>
+            <column name="salary">40000.00</column>
+            <column name="superssn">888665555</column>
+            <column name="dno">5</column>
+        </table>
+        <table name="employee">
+            <column name="fname">Joyce</column>
+            <column name="minit">A</column>
+            <column name="lname">English</column>
+            <column name="ssn">453453453</column>
+            <column name="bdate">1972-07-31</column>
+            <column name="address">5631 Rice, Houston, TX</column>
+            <column name="sex">F</column>
+            <column name="salary">25000.00</column>
+            <column name="superssn">333445555</column>
+            <column name="dno">5</column>
+        </table>
+        <table name="employee">
+            <column name="fname">Ramesh</column>
+            <column name="minit">K</column>
+            <column name="lname">Narayan</column>
+            <column name="ssn">666884444</column>
+            <column name="bdate">1962-09-15</column>
+            <column name="address">975 Fire Oak, Humble, TX</column>
+            <column name="sex">M</column>
+            <column name="salary">38000.00</column>
+            <column name="superssn">333445555</column>
+            <column name="dno">5</column>
+        </table>
+        <table name="employee">
+            <column name="fname">James</column>
+            <column name="minit">E</column>
+            <column name="lname">Borg</column>
+            <column name="ssn">888665555</column>
+            <column name="bdate">1937-11-10</column>
+            <column name="address">450 Stone, Houston, TX</column>
+            <column name="sex">M</column>
+            <column name="salary">55000.00</column>
+            <column name="superssn"></column>
+            <column name="dno">1</column>
+        </table>
+        <table name="employee">
+            <column name="fname">Jennifer</column>
+            <column name="minit">S</column>
+            <column name="lname">Wallace</column>
+            <column name="ssn">987654321</column>
+            <column name="bdate">1941-06-20</column>
+            <column name="address">291 Berry, Bellaire, TX</column>
+            <column name="sex">F</column>
+            <column name="salary">43000.00</column>
+            <column name="superssn">888665555</column>
+            <column name="dno">4</column>
+        </table>
+        <table name="employee">
+            <column name="fname">Ahmad</column>
+            <column name="minit">V</column>
+            <column name="lname">Jabbar</column>
+            <column name="ssn">987987987</column>
+            <column name="bdate">1969-03-29</column>
+            <column name="address">980 Dallas, Houston, TX</column>
+            <column name="sex">M</column>
+            <column name="salary">25000.00</column>
+            <column name="superssn">987654321</column>
+            <column name="dno">4</column>
+        </table>
+        <table name="employee">
+            <column name="fname">Alicia</column>
+            <column name="minit">J</column>
+            <column name="lname">Zelaya</column>
+            <column name="ssn">999887777</column>
+            <column name="bdate">1968-01-19</column>
+            <column name="address">3321 Castle, Spring, TX</column>
+            <column name="sex">F</column>
+            <column name="salary">25000.00</column>
+            <column name="superssn">987654321</column>
+            <column name="dno">4</column>
+        </table>
+        <!-- Table project -->
+        <table name="project">
+            <column name="pname">ProductX</column>
+            <column name="pnumber">1</column>
+            <column name="plocation">Bellaire</column>
+            <column name="dnum">5</column>
+        </table>
+        <table name="project">
+            <column name="pname">ProductY</column>
+            <column name="pnumber">2</column>
+            <column name="plocation">Sugarland</column>
+            <column name="dnum">5</column>
+        </table>
+        <table name="project">
+            <column name="pname">ProductZ</column>
+            <column name="pnumber">3</column>
+            <column name="plocation">Houston</column>
+            <column name="dnum">5</column>
+        </table>
+        <table name="project">
+            <column name="pname">Computerization</column>
+            <column name="pnumber">10</column>
+            <column name="plocation">Stafford</column>
+            <column name="dnum">4</column>
+        </table>
+        <table name="project">
+            <column name="pname">Reorganization</column>
+            <column name="pnumber">20</column>
+            <column name="plocation">Houston</column>
+            <column name="dnum">1</column>
+        </table>
+        <table name="project">
+            <column name="pname">Newbenefits</column>
+            <column name="pnumber">30</column>
+            <column name="plocation">Stafford</column>
+            <column name="dnum">4</column>
+        </table>
+        <!-- Table works_on -->
+        <table name="works_on">
+            <column name="essn">123456789</column>
+            <column name="pno">1</column>
+            <column name="hours">32.5</column>
+        </table>
+        <table name="works_on">
+            <column name="essn">123456789</column>
+            <column name="pno">2</column>
+            <column name="hours">7.5</column>
+        </table>
+        <table name="works_on">
+            <column name="essn">333445555</column>
+            <column name="pno">2</column>
+            <column name="hours">10.0</column>
+        </table>
+        <table name="works_on">
+            <column name="essn">333445555</column>
+            <column name="pno">3</column>
+            <column name="hours">10.0</column>
+        </table>
+        <table name="works_on">
+            <column name="essn">333445555</column>
+            <column name="pno">10</column>
+            <column name="hours">10.0</column>
+        </table>
+        <table name="works_on">
+            <column name="essn">333445555</column>
+            <column name="pno">20</column>
+            <column name="hours">10.0</column>
+        </table>
+        <table name="works_on">
+            <column name="essn">453453453</column>
+            <column name="pno">1</column>
+            <column name="hours">20.0</column>
+        </table>
+        <table name="works_on">
+            <column name="essn">453453453</column>
+            <column name="pno">2</column>
+            <column name="hours">20.0</column>
+        </table>
+        <table name="works_on">
+            <column name="essn">666884444</column>
+            <column name="pno">3</column>
+            <column name="hours">40.0</column>
+        </table>
+        <table name="works_on">
+            <column name="essn">888665555</column>
+            <column name="pno">20</column>
+            <column name="hours">0.0</column>
+        </table>
+        <table name="works_on">
+            <column name="essn">987654321</column>
+            <column name="pno">20</column>
+            <column name="hours">15.0</column>
+        </table>
+        <table name="works_on">
+            <column name="essn">987654321</column>
+            <column name="pno">30</column>
+            <column name="hours">20.0</column>
+        </table>
+        <table name="works_on">
+            <column name="essn">987987987</column>
+            <column name="pno">10</column>
+            <column name="hours">35.0</column>
+        </table>
+        <table name="works_on">
+            <column name="essn">987987987</column>
+            <column name="pno">30</column>
+            <column name="hours">5.0</column>
+        </table>
+        <table name="works_on">
+            <column name="essn">999887777</column>
+            <column name="pno">10</column>
+            <column name="hours">10.0</column>
+        </table>
+        <table name="works_on">
+            <column name="essn">999887777</column>
+            <column name="pno">30</column>
+            <column name="hours">30.0</column>
+        </table>
+    </database>
+</pma_xml_export>

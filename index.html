@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<!-- INDEX.HTML FOR ROUTING TO APPROPIATE PHP QUERY -->
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+	<!-- Signature
+		========================================================
+
+		 Name: _________________________
+
+		 Panther-ID: x x x -_______
+
+		 Course: COP 4722
+
+		 Assignment#: 3
+
+		 Due: Wed, Mar 21, 2018
+
+		 I hereby certify that this work is my own and none of
+		 it is the work of any other person.
+
+		 Signature: ______________________
+	-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS (adds styling for neat responsive presentation)Using CDN to minimize file dependecies -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <title>Frank ASG-3</title>
+    <!--in line styles are bad practice making exception to minimize external files-->
+    <style>
+        .margined {
+            margin-top: 2%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="margined">
+            <h2 class="text-center">Frank Hernandez Assignment 3</h2>
+            <div class="row">
+                <div class="col-sm-12 col-lg-9 mx-auto">
+                    <p class="text-center">
+                        PID: XXX-8472
+                        <br> Course: COP 4722
+                        <br> Date: 3/12/2018
+                        <br> I hereby certify that this work is my own and none of it is the work of any other person.
+                        <br>
+                        <br>
+                        <strong>Note: </strong>Bootstrap was used to facilatate use of CSS and to style components.</p>
+                    <table class="table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">FileName</th>
+                                <th scope="col">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>
+                                    <a href="./dependentsQuery.php">dependentsQuery</a>
+                                </td>
+                                <td>For a given dependent name output:
+                                    <ul>
+                                        <li>dependent name</li>
+                                        <li>firstname, lastname of the corresponding employee</li>
+                                        <li>firstname, lastname of the manager for that employee</li>
+                                    </ul>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>
+                                    <a href="./projectPairQuery.php">projectPairQuery</a>
+                                </td>
+                                <td>
+                                    <li>The firstname and lastname of each pair of employees who work for the same project.</li>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">4</th>
+                                <td>
+                                    <a href="./dnoQuery.php">dnoQuery</a>
+                                </td>
+
+                                <td>For a given department number output:
+                                    <ul>
+                                        <li>name of the department</li>
+                                        <li>number of projects controlled by this department</li>
+                                        <li>total number of hours worked by all employees for all these projects</li>
+                                    </ul>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td>
+                                    <a href="./dnameQuery.php">dnameQuery</a>
+                                </td>
+
+                                <td>For a given department name output:
+                                    <ul>
+                                        <li>department name</li>
+                                        <li>firstname, lastname of the manager</li>
+                                        <li>total number of dependents of all employees who work for the department</li>
+                                    </ul>
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>
