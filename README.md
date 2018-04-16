@@ -3,7 +3,7 @@ running through connecting php to mysql and solving some begginer/intermediate l
 "company db" leveraged xampp to run environment. Front end done on bootstrap4. 
 
 ## Index 
-![](./index-capture.PNG){:height="50%" width="50%"}
+![](./index-capture.PNG)
 
 ## Form 
-![](./form-capture.PNG){:height="50%" width="50%"}
+![](./form-capture.PNG)
